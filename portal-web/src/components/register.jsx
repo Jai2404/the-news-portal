@@ -91,7 +91,7 @@ const Register = () => {
     <div className="registerPage flexDiv">
       <div className="contanier flexDiv">
         <div className="videoDiv">
-          <img src={"/assests/exp.gif"} alt="Logo Image" className="absolut" />
+          <img src={""} alt="Logo Image" className="absolut" />
           <div className="textDiv">
             <h2 className="title">The News Portal</h2>
             <p>Engage, Explore, Evolve</p>

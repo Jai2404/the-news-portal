@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+
 const Form = styled.form`
   display: flex;
   justify-content: center;
-  align-items: center; /* Center vertically */
+  align-items: center; 
   margin-bottom: 20px;
   transition: transform 0.3s ease-in-out;
 `;
@@ -13,11 +14,11 @@ const Form = styled.form`
 const Input = styled.input`
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #fff; /* White border */
+  border: 1px solid #fff; 
   border-radius: 5px;
-  color: #fff; /* White text color */
-  background-color: #000; /* Black background color */
-  margin-right: 5px; /* Add some spacing between input and button */
+  color: #fff; 
+  background-color: #000; 
+  margin-right: 5px; 
 `;
 
 const SubmitButton = styled.button`

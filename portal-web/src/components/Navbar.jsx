@@ -7,19 +7,9 @@ import Login from './login';
 import SearchBar from './SearchBar';
 
 const Navbar = ({ onSearch }) => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isSearchBarVisible, setSearchBarVisible] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const location = useLocation();
-
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
-
-  const toggleSearchBar = () => {
-    setSearchBarVisible(!isSearchBarVisible);
-  };
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
@@ -43,21 +33,25 @@ const Navbar = ({ onSearch }) => {
     };
   }, [prevScrollPos, visible]);
 
+  const excludePaths = ['/', '/politics', '/buisness', '/sports', '/entertainment'];
+
   return (
     <nav className={`NavbarItem ${visible ? '' : 'scrolled'}`}>
-      <div className='menu-icons' onClick={toggleMenu}>
-        {isMenuOpen ? <i className='fa fa-times'></i> : <i className='fa fa-bars'></i>}
+      <div className='menu-icons'>
+        <i className='fa fa-bars'></i>
       </div>
       <div className='nav-logo-container'>
         <h1 className='navbar-logo'>The News Portal</h1>
       </div>
-      {location.pathname !== '/' && (
-        <div className='search-icon-container' onClick={toggleSearchBar}>
-          <i className='fa fa-search'></i>
+
+      {excludePaths.indexOf(location.pathname) === -1 && (
+        <div className='search-icon-container'>
         </div>
       )}
-      {isSearchBarVisible && <SearchBar onSearch={onSearch} />}
-      <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+
+      {excludePaths.indexOf(location.pathname) === -1 && <SearchBar onSearch={onSearch} />}
+
+      <ul className='nav-menu'>
         {MenuItems.map((item, index) => (
           <li key={index}>
             <Link className={item.cName} to={item.url}>
