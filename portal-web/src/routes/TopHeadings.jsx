@@ -1,51 +1,105 @@
+// TopHeadings.jsx
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 
 const Container = styled.div`
-  margin-top: 20px;
+  padding: 20px;
+  margin-top: 6rem;
 `;
 
 const CardContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 const Card = styled.div`
-  width: 30%; /* Adjust the width as needed */
-  margin-bottom: 20px;
+  width: 300px;
+  height: 400px;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
-const TopHeadings = () => {
-  const [data, setData] = useState([]);
+const CardImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`;
+
+const CardBody = styled.div`
+  padding: 20px;
+  text-align: center;
+`;
+
+const StyledButton = styled.a`
+  display: inline-block;
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #27ae60;
+  }
+`;
+
+const TopHeadings = ({onSearch}) => {
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     getNews();
   }, []);
 
-  const getNews = () => {
-    axios.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=13aa3840ad6542d1b4f13aa762e81db9")
+  const getNews = (query = '') => {
+    const apiUrl = query
+      ? `https://newsapi.org/v2/everything?q=${query}&apiKey=13aa3840ad6542d1b4f13aa762e81db9`
+      : 'https://newsapi.org/v2/top-headlines?country=us&apiKey=13aa3840ad6542d1b4f13aa762e81db9';
+
+    axios.get(apiUrl)
       .then((response) => {
         console.log(response);
-        setData(response.data.articles);
+        setSearchResults(response.data.articles);
+      })
+      .catch((error) => {
+        console.error(error);
       });
+  };
+
+  const handleSearch = (query) => {
+    getNews(query);
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar onSearch={handleSearch} />
       <Container>
         <CardContainer>
-          {data.map((value, index) => (
+          {searchResults.map((value, index) => (
             <Card key={index}>
-              <img src={value.urlToImage} className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">{value.title}</h5>
-                <p className="card-text">{value.description}</p>
-                <a href={value.url} className="btn btn-primary" target="_blank" rel="noopener noreferrer">Read More</a>
-              </div>
+              <CardImage src={value.urlToImage} alt="News" />
+              <CardBody>
+                <h5>{value.title}</h5>
+                <p>{value.description}</p>
+                <StyledButton href={value.url} target="_blank" rel="noopener noreferrer">
+                  Read More
+                </StyledButton>
+              </CardBody>
             </Card>
           ))}
         </CardContainer>

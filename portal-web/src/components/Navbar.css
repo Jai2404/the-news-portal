@@ -1,3 +1,5 @@
+/* Navbar.css */
+
 .NavbarItem {
   height: 90px;
   display: flex;
@@ -78,12 +80,13 @@ button {
 
 button:hover {
   background-color: #000000; /* Light gray accent color for the button */
-  color: #ffffff; /* Blaay accent color on hover */
+  color: #ffffff; /* Black text color on hover */
 }
 
 .menu-icons {
   display: none;
 }
+
 .NavbarItem.scrolled {
   transform: translateY(-100%);
   transition: transform 0.3s ease-in-out;
@@ -93,6 +96,7 @@ button:hover {
   transform: translateY(0);
 }
 
+/* Media Query for mobile responsiveness */
 @media screen and (max-width: 850px) {
   .NavbarItem {
     z-index: 99;
@@ -108,7 +112,7 @@ button:hover {
     height: auto;
     position: absolute;
     top: 0;
-    left:-100%;
+    left: -100%;
     opacity: 0;
     padding: 80px 0 30px 0;
     z-index: -1;
@@ -116,14 +120,12 @@ button:hover {
     margin: 0;
     border-radius: 13px;
   }
-  .nav-menu.active{
 
-    
+  .nav-menu.active {
     left: 0;
     opacity: 1;
     z-index: -1;
     transition: 0.3s ease-in-out;
-
   }
 
   .nav-links {
@@ -134,8 +136,8 @@ button:hover {
   }
 
   .nav-links:hover {
-    background: #eeeeee; 
-    color:#000000;
+    background: #eeeeee;
+    color: #000000;
     transition: none;
   }
 
@@ -143,13 +145,13 @@ button:hover {
     display: none;
   }
 
-  .menu-icons{
+  .menu-icons {
     display: block;
   }
 
-  .menu-icons i{
+  .menu-icons i {
     font-size: 1.2rem;
-    color:#222
+    color: #222;
   }
 
   .nav-mobile {
@@ -159,22 +161,34 @@ button:hover {
     margin: auto;
     padding: 1.5rem;
     width: 200px;
-    background-color:#000000; /* White background color for mobile background */
+    background-color: #000000; /* White background color for mobile background */
     text-decoration: none;
     color: #ffffff; /* Black text color */
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 2px;
   }
-/* Add this to your existing styles in Navbar.css */
 
-.nav-mobile:hover {
-  background-color: #ffffff;
-  color: #000000;
-  transition: 0.2s;
-  border-radius: 10px;
-  border: 2px solid black; /* Specify the border properties */
-  padding: 1.3rem; /* Add padding to create space for the border */
-}
+  /* Add this to your existing styles in Navbar.css */
+  .nav-mobile:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transition: 0.2s;
+    border-radius: 10px;
+    border: 2px solid black; /* Specify the border properties */
+    padding: 1.3rem; /* Add padding to create space for the border */
+  }
 
+  .search-icon-container {
+    display: none; /* Hide the search icon on smaller screens */
+  }
+
+  .NavbarItem.scrolled {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .NavbarItem.scrolled.visible {
+    transform: translateY(0);
+  }
 }
